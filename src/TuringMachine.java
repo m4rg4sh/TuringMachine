@@ -1,7 +1,6 @@
 
 public class TuringMachine {
 	private static final String inputDelimiter = "111";
-	private static final String charDelimiter = "1";
 	private TransitionMap transitions;
 	private String tape;
 	private int tapeHeadPosition;
@@ -13,12 +12,12 @@ public class TuringMachine {
 		currentState = 0;
 		machineIsStuck = false;
 		
-		tape = startConfiguration.split(inputDelimiter)[1];
-		transitions = new TransitionMap(startConfiguration.split(inputDelimiter)[0]);
+		tape = startConfiguration.split(inputDelimiter,2)[1];
+		transitions = new TransitionMap(startConfiguration.split(inputDelimiter,2)[0]);
 	}
 	
 	public TuringMachine(){
-		this("0,1,1,1,R;0,0,0,0,R;1,0,1,0,R;1,1,1,1,R;1,_,2,_,R:01000");
+		this("010010010010011010101010011001010010100110010010010010011001000100010001001110011100");
 	}
 	
 	public static void main(String[] args){
@@ -35,7 +34,7 @@ public class TuringMachine {
 
 			String[] transition = transitions.getTransition(currentState,currentChar);
 			if(transition != null){
-				currentState = Integer.parseInt(""+transition[0]);
+				currentState = Integer.parseInt(transition[0]);
 				
 				writeModifiedTapeContent(transition[1]);
 				
@@ -53,15 +52,15 @@ public class TuringMachine {
 
 	private void checkForEndOfTape() {
 		if(tapeHeadPosition == (tape.length())){
-			tape = tape + "_";
+			tape = tape + "2";
 		}
 		if(tapeHeadPosition < 0){
 			tapeHeadPosition = 0;
-			tape = "_" + tape;
+			tape = "2" + tape;
 		}
 	}
 
-	private void writeModifiedTapeContent(char newChar) {
+	private void writeModifiedTapeContent(String newChar) {
 		String prefix = "";
 		String suffix = "";
 		
@@ -75,8 +74,8 @@ public class TuringMachine {
 		tape = prefix + newChar + suffix ;
 	}
 
-	private void moveTapeHead(char direction) {
-		if("R".equals("" + direction)) {
+	private void moveTapeHead(String direction) {
+		if("R".equals(direction)) {
 			tapeHeadPosition++;
 		}else{
 			tapeHeadPosition--;
