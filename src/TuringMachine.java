@@ -23,7 +23,7 @@ public class TuringMachine {
 	private boolean machineIsStuck;
 	private boolean verboseMode;
 	
-	public TuringMachine(String startConfiguration, boolean verboseMode){
+	private TuringMachine(String startConfiguration, boolean verboseMode){
 		tapeHeadPosition = 0;
 		currentState = 0;
 		machineIsStuck = false;
@@ -33,12 +33,12 @@ public class TuringMachine {
 		transitions = new TransitionMap(startConfiguration.split(inputDelimiter,2)[0]);
 	}
 
-    public TuringMachine (String startConfiguration){
+    private TuringMachine (String startConfiguration){
         this(startConfiguration,true);
     }
 	
-	public TuringMachine(){
-		this("010010010010011010101010011001010010100110010010010010011001000100010001001110011100",true);
+	private TuringMachine(){
+		this("01001001001001101010101001100101001010011001001001001001100100010001000100111000001",true);
 	}
 	
 	public static void main(String[] args){
@@ -54,11 +54,11 @@ public class TuringMachine {
     /**
      * Main program which simulates the computations the TM makes
      */
-	public void run(){
+	private void run(){
 		while(!machineIsStuck) {
+            createMinimalTapeLength();
 
             if (verboseMode) {
-                createMinimalTapeLength();
                 printWorkingState();
             }
 
@@ -113,21 +113,6 @@ public class TuringMachine {
     }
 
     /**
-     * Checks if the tape head is either at the beginning or end of the tape and pre- or appends
-     * a blank symbol the tape to extend it
-     * only necessary if verbose mode is not active
-     */
-    private void checkForEndOfTape() {
-		if(tapeHeadPosition == (tape.length())){
-			tape = tape + blank;
-		}
-		if(tapeHeadPosition < 0){
-			tapeHeadPosition = 0;
-			tape = blank + tape;
-		}
-	}
-
-    /**
      * modifies the content of the tape with the new character that should be written at the current
      * tape head position
      * @param newChar the char that will be written to the tape at the current tape head position
@@ -156,7 +141,5 @@ public class TuringMachine {
 		}else{
 			tapeHeadPosition--;
 		}
-		checkForEndOfTape();
 	}
-
 }

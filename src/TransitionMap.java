@@ -10,7 +10,7 @@ import java.util.HashMap;
  * @author Stefan Epprecht <epprest1@students.zhaw.ch>
  */
 
-public class TransitionMap {
+class TransitionMap {
 	private final static String transitionDelimiter = "11";
 	private final static String charDelimiter = "1";
 	private final static String mapDelimiter = ",";
@@ -19,7 +19,7 @@ public class TransitionMap {
 	
 	TransitionMap(String input, boolean path){
 		transitionMap = new HashMap<>();
-		if(path == false){
+		if(!path){
 			fillTransitionMap(input);
 		}else{
 			//TODO implement reading from file
@@ -36,13 +36,13 @@ public class TransitionMap {
      */
 	private void fillTransitionMap(String transitionString){
 		String[] transitions = transitionString.split(transitionDelimiter);
-		for(int i = 0;i < transitions.length;i++){
-			String[] transitionComponents = transitions[i].split(charDelimiter);
-			String key = (transitionComponents[0].length()-1) + mapDelimiter + (transitionComponents[1].length()-1);
-			String value = (transitionComponents[2].length()-1) + mapDelimiter + (transitionComponents[3].length()-1)
-					+ mapDelimiter + getDirection(transitionComponents[4]);
-			transitionMap.put(key, value);
-		}
+        for (String transition : transitions) {
+            String[] transitionComponents = transition.split(charDelimiter);
+            String key = (transitionComponents[0].length() - 1) + mapDelimiter + (transitionComponents[1].length() - 1);
+            String value = (transitionComponents[2].length() - 1) + mapDelimiter + (transitionComponents[3].length() - 1)
+                    + mapDelimiter + getDirection(transitionComponents[4]);
+            transitionMap.put(key, value);
+        }
 	}
 
     /**
