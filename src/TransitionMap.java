@@ -1,17 +1,23 @@
 import java.util.HashMap;
 
+/**
+ * This class is used to map the input from the TuringMachine, consisting of a current state
+ * and a input character to the action which the TM should execute next (so called transition)
+ * A transition map entry has the following format:
+ * key: current state, character read from the tape
+ * value: new state, character to be written, direction to move the tape head
+ *
+ * @author Stefan Epprecht <epprest1@students.zhaw.ch>
+ */
+
 public class TransitionMap {
 	private final static String transitionDelimiter = "11";
 	private final static String charDelimiter = "1";
 	private final static String mapDelimiter = ",";
 	
 	private HashMap<String,String> transitionMap;
-
-	public TransitionMap(String input){
-		this(input,false);
-	}
 	
-	public TransitionMap(String input, boolean path){
+	TransitionMap(String input, boolean path){
 		transitionMap = new HashMap<>();
 		if(path == false){
 			fillTransitionMap(input);
@@ -19,9 +25,17 @@ public class TransitionMap {
 			//TODO implement reading from file
 		}
 	}
-	
-	private void fillTransitionMap(String input){
-		String[] transitions = input.split(transitionDelimiter);
+
+    TransitionMap(String input){
+        this(input,false);
+    }
+
+    /**
+     * Initializes the map with the transitions the TM received as part of its input
+     * @param transitionString the encoded string of transitions
+     */
+	private void fillTransitionMap(String transitionString){
+		String[] transitions = transitionString.split(transitionDelimiter);
 		for(int i = 0;i < transitions.length;i++){
 			String[] transitionComponents = transitions[i].split(charDelimiter);
 			String key = (transitionComponents[0].length()-1) + mapDelimiter + (transitionComponents[1].length()-1);
@@ -31,7 +45,13 @@ public class TransitionMap {
 		}
 	}
 
-	public String[] getTransition(int state, char readCharacter){
+    /**
+     * Searches the Map for a matching transition for the current state of the TM
+     * @param state current state of the TM
+     * @param readCharacter character read from the tape
+     * @return the transition the TM should execute or null if nothing was found
+     */
+	String[] getTransition(int state, char readCharacter){
 		 String[] output = null;
 		 String transition = transitionMap.get(state + mapDelimiter + readCharacter);
 		 if(transition != null){
@@ -41,8 +61,13 @@ public class TransitionMap {
 		 return output;
 	}
 
-    private String getDirection(String input){
-        if(input.equals("0")) {
+    /**
+     * Decodes the direction for the movement of the tape head from unary to a more readable format
+     * @param encodedDirection the direction encoded in unary
+     * @return the direction in a human-readable format
+     */
+    private String getDirection(String encodedDirection){
+        if(encodedDirection.equals("0")) {
             return "L";
         } else {
             return "R";
