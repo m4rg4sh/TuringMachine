@@ -36,9 +36,8 @@ class TuringMachine {
         this.verboseMode = verboseMode;
 
         tape = new Tape(inputString.split(INPUT_DELIMITER, 2)[1]);
-        String encodedTransitions = inputString.split(INPUT_DELIMITER, 2)[0];
-        transitions = new TransitionMap(encodedTransitions);
-        printIntroduction(encodedTransitions);
+        transitions = new TransitionMap(inputString.split(INPUT_DELIMITER, 2)[0]);
+        printIntroduction(inputString);
     }
 
     TuringMachine(String inputString) {

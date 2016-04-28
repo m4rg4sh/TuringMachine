@@ -2,6 +2,8 @@ package TuringMachines;
 
 /**
  * This class represents a tape including the head for the Turing Machine
+ *
+ * @author Stefan Epprecht <epprest1@students.zhaw.ch>
  */
 class Tape {
     private static final String BLANK = TuringMachine.getBlank();
