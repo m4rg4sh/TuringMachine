@@ -1,3 +1,5 @@
+package TuringMachines;
+
 /**
  * This class is a UI for a multiplication on the Universal Turing Machine
  */
@@ -20,5 +22,8 @@ public class TuringMultiplier {
                 TRANSITIONS + "111" + Unary.encodeNumber(Integer.parseInt(factors[0]))
                         + 1 + Unary.encodeNumber(Integer.parseInt(factors[1])));
         machine.run();
+
+        System.out.println("Let me convert this for you stupid humans, the result is: \n");
+        System.out.println(machine.getTape().countZeros());
     }
 }

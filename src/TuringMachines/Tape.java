@@ -1,8 +1,10 @@
+package TuringMachines;
+
 /**
  * This class represents a tape including the head for the Turing Machine
  */
 class Tape {
-    private static final String BLANK = TuringMachine.BLANK;
+    private static final String BLANK = TuringMachine.getBlank();
     private String content;
     private int tapeHeadPosition;
 
@@ -35,12 +37,24 @@ class Tape {
         }
     }
 
-    String getTapeContentBeforeHead() {
-        return content.substring(tapeHeadPosition - 15, tapeHeadPosition);
+    /**
+     * Retrieves the content of the tape before the head
+     *
+     * @param amountOfCharacters amount of characters that should be returned
+     * @return characters on the tape
+     */
+    String getTapeContentBeforeHead(int amountOfCharacters) {
+        return content.substring(tapeHeadPosition - amountOfCharacters, tapeHeadPosition);
     }
 
-    String getTapeContentAfterHead() {
-        return content.substring(tapeHeadPosition, tapeHeadPosition + 16);
+    /**
+     * Retrieves the content of the tape after the head
+     *
+     * @param amountOfCharacters amount of characters that should be returned
+     * @return characters on the tape
+     */
+    String getTapeContentAfterHead(int amountOfCharacters) {
+        return content.substring(tapeHeadPosition + 1, tapeHeadPosition + amountOfCharacters + 1);
     }
 
     /**
@@ -74,5 +88,18 @@ class Tape {
         }
 
         content = prefix + newChar + suffix;
+    }
+
+    /**
+     * @return the amount of zeros on the tape
+     */
+    int countZeros() {
+        int counter = 0;
+        for (char character : content.toCharArray()) {
+            if ("0".equals(character + "")) {
+                counter++;
+            }
+        }
+        return counter;
     }
 }

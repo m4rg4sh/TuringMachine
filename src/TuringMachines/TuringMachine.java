@@ -1,6 +1,7 @@
+package TuringMachines;
 
 /**
- * This class represents a universal turing machine (TM) interpreter
+ * This class represents a universal turing machine (TM) interpreter written for the THIN module @ ZHAW
  *
  * It accepts a unary encoded TM as input including states and the word it should compute
  * If set to verbose Mode the machine will print the current state and the position of the tape head
@@ -14,9 +15,9 @@
  */
 
 class TuringMachine {
-    final static String TRANSITION_DELIMITER = "11";
-    final static String CHAR_DELIMITER = "1";
-    final static String BLANK = "_";
+    private final static String TRANSITION_DELIMITER = "11";
+    private final static String CHAR_DELIMITER = "1";
+    private final static String BLANK = "_";
     private static final String INPUT_DELIMITER = "111";
     private static final int ACCEPTED_STATE = 2;
 
@@ -44,6 +45,17 @@ class TuringMachine {
         this(inputString, true);
     }
 
+    static String getTransitionDelimiter() {
+        return TRANSITION_DELIMITER;
+    }
+
+    static String getCharDelimiter() {
+        return CHAR_DELIMITER;
+    }
+
+    static String getBlank() {
+        return BLANK;
+    }
 
     /**
      * Main program which simulates the computations the TM makes
@@ -101,7 +113,15 @@ class TuringMachine {
         System.out.println("Steps needed to complete the computation:\n" + computationSteps);
     }
 
+    /**
+     * prints the current tape content, tape head position and TM state to the console
+     */
     private void printWorkingState() {
-        System.out.println(tape.getTapeContentBeforeHead() + "|q" + currentState + "|" + tape.getTapeContentAfterHead());
+        System.out.println(tape.getTapeContentBeforeHead(15) + "|q" + currentState + "|" + tape.getCurrentChar()
+                + tape.getTapeContentAfterHead(15));
+    }
+
+    Tape getTape() {
+        return tape;
     }
 }

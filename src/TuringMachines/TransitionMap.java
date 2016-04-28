@@ -1,7 +1,9 @@
+package TuringMachines;
+
 import java.util.HashMap;
 
 /**
- * This class is used to map the input from the TuringMachine, consisting of a current state
+ * This class is used to map the input from the TuringMachines.TuringMachine, consisting of a current state
  * and a input character to the action which the TM should execute next (so called transition)
  * A transition map entry has the following format:
  * key: current state, character read from the tape
@@ -11,9 +13,9 @@ import java.util.HashMap;
  */
 
 class TransitionMap {
-    private final static String TRANSITION_DELIMITER = TuringMachine.TRANSITION_DELIMITER;
-    private final static String CHAR_DELIMITER = TuringMachine.CHAR_DELIMITER;
-    private final static String MAP_DELIMITER = ",";
+    private final String TRANSITION_DELIMITER = TuringMachine.getTransitionDelimiter();
+    private final String CHAR_DELIMITER = TuringMachine.getCharDelimiter();
+    private final String MAP_DELIMITER = ",";
 
     private final HashMap<String, String> transitionMap;
 
