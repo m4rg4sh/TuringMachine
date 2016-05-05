@@ -3,6 +3,8 @@ package TuringMachines;
 /**
  * This class en- and decodes unary numbers, symbols and directions for the universal turing machine
  *
+ * @author Lawrence Markwalder <markwlaw@students.zhaw.ch>
+ * @author Luca Egli <eglilu01@students.zhaw.ch>
  * @author Stefan Epprecht <epprest1@students.zhaw.ch>
  */
 class Unary {

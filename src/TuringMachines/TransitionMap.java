@@ -9,6 +9,8 @@ import java.util.HashMap;
  * key: current state, character read from the tape
  * value: new state, character to be written, direction to move the tape head
  *
+ * @author Lawrence Markwalder <markwlaw@students.zhaw.ch>
+ * @author Luca Egli <eglilu01@students.zhaw.ch>
  * @author Stefan Epprecht <epprest1@students.zhaw.ch>
  */
 

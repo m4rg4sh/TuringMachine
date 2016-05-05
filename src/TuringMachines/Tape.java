@@ -3,7 +3,10 @@ package TuringMachines;
 /**
  * This class represents a tape including the head for the Turing Machine
  *
+ * @author Lawrence Markwalder <markwlaw@students.zhaw.ch>
+ * @author Luca Egli <eglilu01@students.zhaw.ch>
  * @author Stefan Epprecht <epprest1@students.zhaw.ch>
+ *
  */
 class Tape {
     private static final String BLANK = TuringMachine.getBlank();
@@ -16,7 +19,7 @@ class Tape {
     }
 
     /**
-     * Gets the current char under the RW-head on the tape
+     * Gets the current char underneath the RW-head on the tape
      *
      * @return the current char on the tape
      */
